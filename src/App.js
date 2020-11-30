@@ -383,38 +383,47 @@
 // export default App;
 
 //****************************************************************************************************************
+//TODO comentar la función persona que estoy pasando por props en el return de la función App.
 
 //Lo mismo añadiendo la función de resta:
 import "./App.css";
 import { useState } from "react";
 
-function Persona(props) {
-  function mostrarMensaje() {
-    window.alert("Mensaje");
-  }
-  return (
-    <>
-      <h1>{props.nombre}</h1>
-      <p>{props.edad}</p>
-      <button onClick={mostrarMensaje}>Click</button>
-    </>
-  );
-}
-
 function App() {
-  let [numero, setNumero] = useState(5);
+  const [numero, setNumero] = useState(5);
   function sumar() {
     setNumero(numero + 1);
   }
   function restar() {
     setNumero(numero - 1);
   }
+  //
   return (
     <>
       <Persona nombre="Manu" edad={30} />
       <h1>{numero}</h1>
       <button onClick={sumar}>Sumar</button>
       <button onClick={restar}>Restar</button>
+    </>
+  );
+}
+
+// Creo la función persona.
+// Esta función recoge el nombre y la edad que le paso por parámetros en el return de App.js, que es donde la llamo.
+// TODO VER DE  NUEVO EXPLICACIÓN MIN. 44 REACT STATE
+
+function Persona(props) {
+  let [edad, setEdad] = useState(props.edad);
+  function felisitatu() {
+    //window.alert("Felicidades");
+    setEdad(edad + 1);
+    console.log(edad);
+  }
+  return (
+    <>
+      <h1>{props.nombre}</h1>
+      <p>{edad}</p>
+      <button onClick={felisitatu}>Click</button>
     </>
   );
 }
