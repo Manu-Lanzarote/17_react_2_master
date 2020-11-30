@@ -185,59 +185,60 @@
 
 //BÁSICO. Pasar UN ARRAY DE OBJETOS por PARÁMETROS A UN COMPONENTE de React.++++++++++++++++++++++++++++++++++++++++
 
-import "./App.css";
+// import "./App.css";
 
 //Creo el array de objetos fuera de la función (o lo importo si fuera el caso).
-let personas = [
-  {
-    nombre: "Ilona",
-    edad: 43,
-    profesion: "Dance Teacher",
-  },
-  {
-    nombre: "Kev",
-    edad: 63,
-    profesion: "Dive Instructor",
-  },
-  {
-    nombre: "Manu",
-    edad: 45,
-    profesion: "Developer",
-  },
-];
+// let personas = [
+//   {
+//     nombre: "Ilona",
+//     edad: 43,
+//     profesion: "Dance Teacher",
+//   },
+//   {
+//     nombre: "Kev",
+//     edad: 63,
+//     profesion: "Dive Instructor",
+//   },
+//   {
+//     nombre: "Manu",
+//     edad: 45,
+//     profesion: "Developer",
+//   },
+// ];
 
 // 1 - Recorro el array de objetos con un .map y lo envío al componente Lista.js
-// RERCUERDA: Dentro de un .map lo que está entre los paréntesis del funtion (en este caso "persona" sería el equivalente al personas[i] de un bucle for.
+// RECUERDA: Dentro de un .map lo que está entre los paréntesis del funtion (en este caso "persona" sería el equivalente al personas[i] de un bucle for.
+//Sobre la Key. A cada vuelta que da .map crea un div para mostrar enviar los datos de cada persona por lo que no podemos meter una key tipo key="una_persona", ya que esta key se repitiría en cada vez y la consola del navegador nos tiraría que hay un error. Por ello a la key hay que meterle una variable, por ejemplo el nombre en este caso.
 
-function App() {
-  const miArray = personas.map(function (persona) {
-    return (
-      <div key="una_persona">
-        <Lista
-          nombre={persona.nombre}
-          edad={persona.edad}
-          profesion={persona.profesion}
-        />
-      </div>
-    );
-  });
-  return miArray;
-}
+// function App() {
+//   const miArray = personas.map(function (persona) {
+//     return (
+//       <div key={persona.nombre}>
+//         <Lista
+//           nombre={persona.nombre}
+//           edad={persona.edad}
+//           profesion={persona.profesion}
+//         />
+//       </div>
+//     );
+//   });
+//   return miArray;
+// }
 
 // 2 - Defino el componente Lista.js y le paso el objeto por parámetros para pintarlo en pantalla.
 
-function Lista(props) {
-  console.log(props);
-  return (
-    <>
-      <h1>{props.nombre}</h1>
-      <p>{props.edad}</p>
-      <p>{props.profesion}</p>
-    </>
-  );
-}
+// function Lista(props) {
+//   console.log(props);
+//   return (
+//     <>
+//       <h1>{props.nombre}</h1>
+//       <p>{props.edad}</p>
+//       <p>{props.profesion}</p>
+//     </>
+//   );
+// }
 
-export default App;
+// export default App;
 
 //****************************************************************************************************************
 //****************************************************************************************************************
@@ -256,7 +257,8 @@ export default App;
 // <p>Edad: {persona.edad}</p>
 // <p>Profesión: {persona.profesion}</p>
 //</div>
-//Y así eliminaríamos ese error. (No inserto la key directamente para que se vea la explicación)
+
+//EN EL CASO DE QUE TENGAMOS UN .map    A cada vuelta que da .map crea un div para mostrar enviar los datos de cada persona por lo que no podemos meter una key tipo key="una_persona", ya que esta key se repitiría en cada vez y la consola del navegador nos tiraría que hay un error. Por ello a la key hay que meterle una variable, por ejemplo el nombre en este caso.
 
 //****************************************************************************************************************
 
@@ -268,3 +270,177 @@ export default App;
 //IMPORTANTE: En react al atributo class por convención se le le llama className, p.ej: <div className=""></div>
 
 //****************************************************************************************************************
+//****************************************************************************************************************
+//****************************************************************************************************************
+//****************************************************************************************************************
+
+//     ESTADOS EN REACT          ESTADOS EN REACT         ESTADOS EN REACT            ESTADOS EN REACT
+
+// INTRODUCCIÓN:
+
+//Un código básico que por una parte tiene la variable número fuera de la función App y dentro de App tiene la función hola a la que llamamos con el onClick del botón.
+//Nota: onclick se escribe con C en JSX:  onClik   y además no escribimos los paréntesis despué de   hola   por que si lo hacemos, llamaremos a lo función de inmediato.
+
+// import "./App.css";
+
+// let numero = 1;
+
+// function App() {
+//   function hola() {
+//     window.alert("Hellou");
+//   }
+//   return (
+//     <>
+//       <h1>{numero}</h1>
+//       <button onClick={hola}>Click</button>
+//     </>
+//   );
+// }
+
+// export default App;
+
+//Ahora creo una función que sume 1 a número y muestre el valor en consola:
+
+// import "./App.css";
+
+// let numero = 1;
+
+// function App() {
+//   function sumarUno() {
+//     numero = numero + 1;
+//     console.log(numero);
+//   }
+//   return (
+//     <>
+//       <h1>{numero}</h1>
+//       <button onClick={sumarUno}>Click</button>
+//     </>
+//   );
+// }
+
+// export default App;
+
+//Cuando hacemos click al botón veremos que la consola sí va sumando pero el html no cambia, (siempre es 1)
+//Esto es por que la variable número está fuera del componente, es decir, está fuera de la función App, (que es el componente).
+//Para que React modifique el HTML cuando un componente lo hace cambiar de valor necesitaremos CAMBIAR SU ESTADO.
+//Para ello modificaremos el estado del componente       state       . El     state    son las variables asociadas a ese componente.
+
+//PARA ELLO CREAREMOS UNA VARIABLE DE ESTADO CON UNA FUNCIÓN set que lo que hace es cambiar el estado de esa variable.
+//Así basándonos en el ejemplo anterior, lo haríamos de la sigueinte manera:
+
+//Así en primer lugar hay que impotar el módulo   useState    escribiendo esta línea al principio, (por ejemplo despues de importar el css)
+
+// import "./App.css";
+
+// import { useState } from "react";
+
+// function App() {
+//Y después escribiremos la función, (en este caso la función App), que contendrá un array con la variable a la que cambiaremos el estado y una función que por convención empieza por set + el nombre de la variable que hemos excrito antes, (p.ej. setNumero)
+//Esto lo igualaremos a useState() que entre las llaves contendrá el valor por defecto de la variable a la que cambiaremos el valor, (en este caso 8)
+
+//   let [numero, setNumero] = useState(8);
+//   function sumar() {
+//     numero = numero + 1;
+//     console.log(numero);
+//   }
+//   return (
+//     <>
+//       <h1>{numero}</h1>
+//       <button onClick={sumar}>Click</button>
+//     </>
+//   );
+// }
+
+// export default App;
+
+//****************************************************************************************************************
+
+// ESTADOS DE REACT /             ASÍ ES EL CÓDIGO:
+
+//En este punto estaremos igual que en el ejemplo anterior. Nos cambiará el valor en consola pero no cambiará el valor del número en el html.
+//Para cambiarlo usaremos setNumero dentro de la función sumar()
+
+// import "./App.css";
+
+// import { useState } from "react";
+
+// function App() {
+
+// ESTE ES EL ESTADO DE REACT. La variable numero se declara aquí, (y no antes, como en javascript clásico. numero ES UNA VARIABLE DE ESTADO). Lo que hacemos es crear la variable de estado (numero) con una función (setNumero) que lo que hace es cambiar ese estado y con useState, entre los paréntesis le damos un valor por defecto, (en este caso el 8)
+
+//   let [numero, setNumero] = useState(8);
+//   function sumar() {
+//     setNumero(numero + 1);
+//   }
+//   return (
+//     <>
+//       <h1>{numero}</h1>
+//       <button onClick={sumar}>Click</button>
+//     </>
+//   );
+// }
+
+// export default App;
+
+//****************************************************************************************************************
+
+//Lo mismo añadiendo la función de resta:
+import "./App.css";
+import { useState } from "react";
+
+function Persona(props) {
+  function mostrarMensaje() {
+    window.alert("Mensaje");
+  }
+  return (
+    <>
+      <h1>{props.nombre}</h1>
+      <p>{props.edad}</p>
+      <button onClick={mostrarMensaje}>Click</button>
+    </>
+  );
+}
+
+function App() {
+  let [numero, setNumero] = useState(5);
+  function sumar() {
+    setNumero(numero + 1);
+  }
+  function restar() {
+    setNumero(numero - 1);
+  }
+  return (
+    <>
+      <Persona nombre="Manu" edad={30} />
+      <h1>{numero}</h1>
+      <button onClick={sumar}>Sumar</button>
+      <button onClick={restar}>Restar</button>
+    </>
+  );
+}
+
+export default App;
+
+//****************************************************************************************************************
+
+//También podríamos darle otro tipo de valores, strings, arrays, objetos...
+//Por ejemplo, lo mismo con strings:
+
+// import "./App.css";
+
+// import { useState } from "react";
+
+// function App() {
+//   let [numero, setNumero] = useState("Manu");
+//   function sumar() {
+//     setNumero("Ilona");
+//   }
+//   return (
+//     <>
+//       <h1>{numero}</h1>
+//       <button onClick={sumar}>Click</button>
+//     </>
+//   );
+// }
+
+// export default App;
