@@ -276,7 +276,7 @@
 
 //     ESTADOS EN REACT          ESTADOS EN REACT         ESTADOS EN REACT            ESTADOS EN REACT
 
-// INTRODUCCIÓN:
+// INTRODUCCIÓN - VER          CÓDIGO        FINALIZADO                EN LÍNEA  358
 
 //Un código básico que por una parte tiene la variable número fuera de la función App y dentro de App tiene la función hola a la que llamamos con el onClick del botón.
 //Nota: onclick se escribe con C en JSX:  onClik   y además no escribimos los paréntesis despué de   hola   por que si lo hacemos, llamaremos a lo función de inmediato.
@@ -354,8 +354,9 @@
 // export default App;
 
 //****************************************************************************************************************
+//****************************************************************************************************************
 
-// ESTADOS DE REACT /             ASÍ ES EL CÓDIGO:
+// ESTADOS DE REACT /                        ASÍ ES EL CÓDIGO:
 
 //En este punto estaremos igual que en el ejemplo anterior. Nos cambiará el valor en consola pero no cambiará el valor del número en el html.
 //Para cambiarlo usaremos setNumero dentro de la función sumar()
@@ -367,6 +368,9 @@
 // function App() {
 
 // ESTE ES EL ESTADO DE REACT. La variable numero se declara aquí, (y no antes, como en javascript clásico. numero ES UNA VARIABLE DE ESTADO). Lo que hacemos es crear la variable de estado (numero) con una función (setNumero) que lo que hace es cambiar ese estado y con useState, entre los paréntesis le damos un valor por defecto, (en este caso el 8)
+
+//OJO!!!!
+//MUY IMNPORTANTE/ Si estamos usando    props    recuerda cambiar el  "props.loquesea"  del return por la variable de estado, SI NO, NO FUNCIONARÁ.
 
 //   let [numero, setNumero] = useState(8);
 //   function sumar() {
@@ -410,7 +414,9 @@ function App() {
 
 // Creo la función persona.
 // Esta función recoge el nombre y la edad que le paso por parámetros en el return de App.js, que es donde la llamo.
-// TODO VER DE  NUEVO EXPLICACIÓN MIN. 44 REACT STATE
+
+//OJO!!!!
+//MUY IMNPORTANTE/ Si estamos usando    props    recuerda cambiar el  "props.loquesea"  del return por la variable de estado, SI NO, NO FUNCIONARÁ.
 
 function Persona(props) {
   let [edad, setEdad] = useState(props.edad);
